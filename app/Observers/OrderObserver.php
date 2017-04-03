@@ -30,14 +30,16 @@ class OrderObserver
 			$this->dispatch(new OrderConfirmed($order));
 			$order->product->quantity--;
 			$order->product->save();
+
+			if (App::environment('production')) {
+				$this->notify(new OrderCreated($order));
+			}
 		}
 	}
 
 	public function created(Order $order)
 	{
-		if (App::environment('production')) {
-			$this->notify(new OrderCreated($order));
-		}
+
 	}
 
 	public function routeNotificationForSlack()

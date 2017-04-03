@@ -19,6 +19,7 @@
 
 <script>
 	import axios from 'axios'
+	import _ from 'lodash'
 	import {getUrl, getApiUrl, getImageUrl} from 'js/utils/env'
 	import Order from './Order'
 
@@ -38,10 +39,13 @@
 			getOrders() {
 				axios.get(getApiUrl(`orders/all`))
 						.then((response) => {
-							this.orders = response.data
+							this.orders = response.data.filter(this.isConfirmed)
 						})
 						.catch(console.log.bind(console))
-			}
+			},
+			isConfirmed(order) {
+				return !_.isEmpty(order.method)
+			},
 		},
 		mounted() {
 			this.getOrders()

@@ -34,7 +34,7 @@
 				</span>
 				{{ paymentStatus }}
 			</div>
-			<div class="card-footer-item payment-status" :class="paymentStatusClass">
+			<div class="card-footer-item payment-status" :class="paymentStatusClass" v-if="!isPaid">
 				<a :href="paymentMethodChangeUrl" title="Zmień metodę płatności">
 					<span class="icon is-small status-icon">
 						<i class="fa fa-pencil-square-o"></i>

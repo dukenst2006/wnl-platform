@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Order;
+use App\Models\User;
 use App\Observers\OrderObserver;
+use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		Order::observe(OrderObserver::class);
+		User::observe(UserObserver::class);
 
 		// Send slack notifications when a critical or higher level error occurs
 //		$monolog = Log::getMonolog();

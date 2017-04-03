@@ -89,10 +89,6 @@
 			items() {
 				return [
 					{
-						'text': 'Plan lekcji',
-						'route': 'dashboard',
-					},
-					{
 						'text': 'Twoje zamówienia',
 						'route': 'my-orders',
 					},

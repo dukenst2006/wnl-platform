@@ -95,7 +95,6 @@
 					{!! form_label($form->invoice) !!}
 					{!! form_errors($form->invoice) !!}
 				</div>
-
 				<div id="personal-data-invoice-form" class="form-group @if (Session::get('_old_input.invoice')) show @else hidden @endif">
 					<div class="control">
 						{!! form_label($form->invoice_name) !!}

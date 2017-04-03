@@ -103,8 +103,6 @@ class PersonalDataController extends Controller
 		Auth::login($user);
 		Log::notice('User automatically logged in after registration.');
 
-		Mail::to(Auth::user())->send(new SignUpConfirmation($user));
-
 		return redirect(route('payment-confirm-order'));
 	}
 
