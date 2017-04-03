@@ -5,6 +5,9 @@ dist: trusty
 php:
   - 7.1
 
+node_js:
+  - 6.9.5
+
 install:
   - travis_retry composer install --no-interaction
   - travis_retry yarn install
