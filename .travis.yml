@@ -11,6 +11,9 @@ addons:
 php:
   - 7.1
 
+services:
+  - mysql
+
 install:
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
@@ -23,7 +26,9 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - sleep 3 # give xvfb some time to start
   - ./vendor/laravel/dusk/bin/chromedriver-linux &
+  - cp .travis.env .env
   - php artisan serve &
+  - php artisan key:generate
 
 script:
   - php artisan dusk
