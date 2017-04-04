@@ -2,7 +2,10 @@ sudo: required
 language: php
 dist: trusty
 addons:
-  artifacts: true
+  artifacts:
+    s3_region: "eu-frankfurt"
+    paths:
+      - "./tests/Browser/screenshots"
   apt:
     sources:
       - google-chrome
