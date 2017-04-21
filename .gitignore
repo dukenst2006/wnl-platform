@@ -7,7 +7,7 @@ composer.lock
 env*/
 public/css/*
 public/js/*
-public/mix-manifest.json
+public/mix*
 storage/debugbar
 _ide_helper.php
 .DS_Store

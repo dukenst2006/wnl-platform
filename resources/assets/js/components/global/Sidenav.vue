@@ -4,12 +4,13 @@
 
 		<ul class="breadcrumbs" v-if="breadcrumbs">
 			<wnl-sidenav-item v-for="breadcrumb in breadcrumbs"
-				:itemClass="breadcrumb.itemClass"
-				:to="breadcrumb.to"
-				:isDisabled="breadcrumb.isDisabled"
-				:method="breadcrumb.method"
-				:iconClass="breadcrumb.iconClass"
-				:iconTitle="breadcrumb.iconTitle"
+							  :itemClass="breadcrumb.itemClass"
+							  :to="breadcrumb.to"
+							  :isDisabled="breadcrumb.isDisabled"
+							  :method="breadcrumb.method"
+							  :iconClass="breadcrumb.iconClass"
+							  :iconTitle="breadcrumb.iconTitle"
+							  :key="breadcrumb.id"
 			>
 				{{breadcrumb.text}}
 			</wnl-sidenav-item>
@@ -20,12 +21,13 @@
 			<ul class="items" v-if="items">
 				<li class="item heading small" v-if="itemsHeading">{{itemsHeading}}</li>
 				<wnl-sidenav-item v-for="item in items"
-					:itemClass="item.itemClass"
-					:to="item.to"
-					:isDisabled="item.isDisabled"
-					:method="item.method"
-					:iconClass="item.iconClass"
-					:iconTitle="item.iconTitle"
+								  :itemClass="item.itemClass"
+								  :to="item.to"
+								  :isDisabled="item.isDisabled"
+								  :method="item.method"
+								  :iconClass="item.iconClass"
+								  :iconTitle="item.iconTitle"
+								  :key="item.id"
 				>
 					{{item.text}}
 				</wnl-sidenav-item>

@@ -17,7 +17,7 @@
 		</div>
 		<div v-if="loaded">
 			<div v-if="hasOrders">
-				<wnl-order :order="order" v-for="order in orders"></wnl-order>
+				<wnl-order :order="order" v-for="order in orders" :key="order.id"></wnl-order>
 			</div>
 			<div v-else>
 				<div class="box has-text-centered">

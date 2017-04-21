@@ -10,7 +10,8 @@
 		<div v-if="questions">
 			<wnl-question v-for="question in questions"
 						  :question="question"
-						  :lessonId="lessonId">
+						  :lessonId="lessonId"
+						  :key="question.id">
 			</wnl-question>
 		</div>
 		<div v-else>

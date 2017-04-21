@@ -21,7 +21,8 @@
 						v-for="answer in answers"
 						:answer="answer"
 						:questionId="question.id"
-						:lessonId="lessonId">
+						:lessonId="lessonId"
+						:key="answer.id">
 			</wnl-answer>
 		</div>
 	</article>

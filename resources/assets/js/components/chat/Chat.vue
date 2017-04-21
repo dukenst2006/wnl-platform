@@ -5,9 +5,10 @@
 			<div class="wnl-chat-content">
 				<div class="wnl-chat-content-inside" v-if="loaded">
 					<wnl-message v-for="(message, index) in messages"
-						:showAuthor="isAuthorUnique[index]"
-						:username="message.username"
-						:time="message.time">
+								 :showAuthor="isAuthorUnique[index]"
+								 :username="message.username"
+								 :time="message.time"
+								 :key="message.id">
 							{{ message.content }}
 					</wnl-message>
 				</div>
