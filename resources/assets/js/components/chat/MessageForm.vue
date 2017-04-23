@@ -6,10 +6,11 @@
 		<div class="media-content">
 			<p class="control">
 				<textarea :id="inputId" v-model="message" class="textarea wnl-form-textarea"
-					:style="{ height: textareaHeight }"
-					:disabled="disabled"
+					@keydown="calculateTextareaHeight"
 					@keydown.enter="suppressEnter"
-					@keyup.enter="sendMessage">
+					@keyup.enter="sendMessage"
+					:disabled="disabled"
+					>
 				</textarea>
 			</p>
 			<div class="message is-warning" v-if="error.length > 0">
@@ -61,7 +62,11 @@
 				return !this.loaded || this.message.length === 0
 			},
 			textareaHeight() {
-				if (this.canvasContext !== null && this.message.length > 0) {
+				if (this.canvasContext !== null &&
+					!this.textareaHeightChecked &&
+					this.message.length > 0
+				) {
+					this.textareaHeightChecked = true
 					return this.calculateTextareaHeight(this.message)
 				} else {
 					return null
@@ -70,31 +75,36 @@
 		},
 		methods: {
 			setTextareaStyles() {
-				this.textarea = document.getElementById(this.inputId)
 				this.computedStyles = window.getComputedStyle(this.textarea)
 			},
 			setTextMeasureCanvas() {
-				let canvas, context
+				if (this.canvasContext === null) {
+					let canvas, context
 
-				canvas = this.measureCanvas || document.createElement('canvas')
-				context = canvas.getContext('2d')
-				context.font = `${this.computedStyles.fontSize} ${this.computedStyles.fontFamily}`
-				this.canvasContext = context
+					canvas = this.measureCanvas || document.createElement('canvas')
+					context = canvas.getContext('2d')
+					context.font = `${this.computedStyles.fontSize} ${this.computedStyles.fontFamily}`
+					this.canvasContext = context
+				}
 
 				return true
 			},
-			calculateTextareaHeight(message) {
-				// TODO: Mar 5, 2017 - Use the same padding declaration for styling
-				const padding = 6
-				let lines = Math.max(
-					Math.ceil(
-						this.canvasContext.measureText(message).width * 1.2 / parseInt(this.computedStyles.width)
-					),
-				1)
-				if (lines > 1) {
-					return `${padding * 2 + lines * parseInt(this.computedStyles.lineHeight)}px`
+			calculateTextareaHeight(event) {
+				// Don't bother checking the height if Enter was pressed
+				if (event.keyCode === 13) {
+					return null
 				}
-				return null
+
+				let padding = 6,
+					border = 1.5,
+					lines = Math.max(
+						Math.ceil(
+							(this.canvasContext.measureText(this.message).width * 1.2 + padding * 2) / parseInt(this.computedStyles.width)
+						),
+					1),
+					height = border * 2 + padding * 2 + lines * parseInt(this.computedStyles.lineHeight)
+
+				this.textarea.style.height = `${height}px`
 			},
 			sendMessage(event) {
 				if (this.sendingDisabled) {
@@ -125,6 +135,7 @@
 			}
 		},
 		mounted() {
+			this.textarea = document.getElementById(this.inputId)
 			this.setTextareaStyles()
 			this.setTextMeasureCanvas()
 		},
