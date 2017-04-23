@@ -87,7 +87,7 @@
 					lesson = this.getLesson(inProgressId)
 					lesson.status = STATUS_IN_PROGRESS
 				} else {
-					for (const lessonId in this.getLessons) {
+					for (var lessonId in this.getLessons) {
 						if (this.isLessonAvailable(lessonId) &&
 							!this.wasLessonStarted(this.courseId, lessonId)
 						) {

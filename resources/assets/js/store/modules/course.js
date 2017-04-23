@@ -34,7 +34,7 @@ const getters = {
 	getLessons: state => state.structure[resource('lessons')],
 	getAvailableLessons: (state, getters) => {
 		let lesson, lessons = []
-		for (const lessonId in getters.getLessons) {
+		for (var lessonId in getters.getLessons) {
 			lesson = getters.getLessons[lessonId]
 			if (lesson.isAvailable) {
 				lessons.push(lesson)
