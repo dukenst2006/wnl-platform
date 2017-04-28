@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
 		Commands\CancelOrder::class,
 		Commands\ChangeOrderPaymentMethod::class,
 		Commands\PopulateAmountColumns::class,
+		Commands\OptimaExport::class,
     ];
 
     /**
