@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 class OptimaExport extends Command
 {
-	const DATABASE_ID = 'abc';
+	const DATABASE_ID = 'bethi';
 	const ADVANCE_SERIES_NAME = 'F-ZAL';
 
 	/**
@@ -175,16 +175,18 @@ class OptimaExport extends Command
 
 		if ($invoice->vat === 'zw') {
 			$vatRate = '0';
+			$vatValue = 0;
 			$vatStatus = 'zwolniona';
 			$uwz = 'warunkowo';
 		} else {
 			$vatRate = '23';
+			$vatValue = 0.23;
 			$vatStatus = 'opodatkowana';
 			$uwz = 'Tak';
 		}
 
-		$priceNet = $this->price($invoice->amount / (1 + (int)$vatRate));
-		$vatValue = $this->price($invoice->amount - $invoice->amount / (1 + (int)$vatRate));
+		$priceNet = $this->price($invoice->amount / (1 + $vatValue));
+		$vatValue = $this->price($invoice->amount - $priceNet);
 		$priceGross = $this->price($invoice->amount);
 
 		$invoice = [
