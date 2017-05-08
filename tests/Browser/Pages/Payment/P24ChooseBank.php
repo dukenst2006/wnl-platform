@@ -15,7 +15,7 @@ class P24ChooseBank extends BasePage
 	 */
 	public function url()
 	{
-		return 'https://sandbox.przelewy24.pl/trnDirect';
+		return 'https://sandbox.przelewy24.pl/trnRequest';
 	}
 
 	/**
@@ -25,7 +25,7 @@ class P24ChooseBank extends BasePage
 	 */
 	public function assert(Browser $browser)
 	{
-		PHPUnit::assertEquals($this->url(), $browser->driver->getCurrentURL());
+		PHPUnit::assertStringStartsWith($this->url(), $browser->driver->getCurrentURL());
 	}
 
 	/**
@@ -36,9 +36,10 @@ class P24ChooseBank extends BasePage
 	public function elements()
 	{
 		return [
-			'@ing-logo'        => '#pf112',
-			'@accept-tou'      => 'input[name="submit_przedplata"]',
-			'@confirm-payment' => 'input[name="submit_poprawna"]',
+			'@ing-logo'        => '.bank-logo-112',
+			'@accept-tou'      => '#reagulation-accept-button',
+			'@login-button'    => 'button[type="submit"]',
+			'@confirm-payment' => '#pay_by_link_pay',
 		];
 	}
 }

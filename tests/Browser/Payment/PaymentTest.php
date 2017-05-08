@@ -80,13 +80,24 @@ class PaymentTest extends DuskTestCase
 			$browser
 				->on(new ConfirmOrderPage)
 				->assertSeeAll([$user['email'], $user['firstName'], $user['lastName'], $user['address']])
-				->press('@online-payment-button')
-				->waitForText('Wybierz formę płatności');
+				->press('button.p24-submit')
+				->waitForText('Wybierz formę płatności', 30);
 
 			$browser
 				->on(new P24ChooseBank)
-				->press('@ing-logo')
-				->press('@accept-tou')
+				->press('@ing-logo');
+
+			try {
+				$browser
+					->waitFor('@accept-tou')
+					->press('@accept-tou');
+			} catch (\Exception $e) {
+				print PHP_EOL . '@accept-tou element not found' . PHP_EOL;
+			}
+
+			$browser
+				->waitFor('@login-button')
+				->press('@login-button')
 				->press('@confirm-payment');
 
 			$browser
